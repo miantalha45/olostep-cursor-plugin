@@ -1,7 +1,7 @@
 {
   "name": "olostep",
-  "version": "1.0.0",
-  "description": "Turn the entire web into LLM-ready context. Olostep integrates powerful web scraping, search, and AI answers directly into Cursor. Essential for developer workflows: debug obscure errors by scraping GitHub issues, automate framework migrations by scraping breaking changes, turn websites into typed JSON schemas, or crawl entire API docs into context. Handles JS rendering, anti-bot, and proxies automatically.",
+  "version": "1.1.0",
+  "description": "Live web search, scraping, and documentation-to-code workflows for Cursor. Use Olostep MCP to research errors, extract current docs, map sites, crawl documentation, and generate code from live sources.",
   "author": {
     "name": "Olostep",
     "email": "support@olostep.com"
@@ -23,5 +23,6 @@
   ],
   "logo": "assets/logo.png",
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "commands": "./commands/",
+  "mcpServers": "./mcp.json"
 }

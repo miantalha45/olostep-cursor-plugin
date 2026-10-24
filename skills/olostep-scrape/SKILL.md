@@ -1,5 +1,5 @@
 ---
-name: scrape
+name: olostep-scrape
 description: Scrape a single webpage and extract its content as clean markdown, HTML, JSON, or text using Olostep. Use when the user shares a URL and wants to read it, extract content from it, understand its structure, use it as context for coding, or turn a page into data. Handles JavaScript-rendered pages, SPAs, and bot-protected sites automatically.
 ---
 
@@ -56,10 +56,10 @@ Most scraping fails on modern sites: JavaScript doesn't render, CAPTCHAs block y
 
 ## Chain with other skills
 
-- **scrape -> code**: Scrape docs, then write an integration (see `/docs-to-code`).
-- **map -> scrape**: Use `/map` to find the right page, then scrape it.
-- **search -> scrape**: Use `/search` to find relevant URLs, then scrape the best one for full content.
-- **scrape -> batch**: Scrape one page to confirm format, then `/batch` the rest.
+- **scrape -> code**: Scrape docs, then write an integration (see `/olostep-docs-to-code`).
+- **map -> scrape**: Use `/olostep-map` to find the right page, then scrape it.
+- **search -> scrape**: Use `/olostep-search` to find relevant URLs, then scrape the best one for full content.
+- **scrape -> batch**: Scrape one page to confirm format, then `/olostep-batch` the rest.
 
 ## Parameters
 - **url_to_scrape**: URL to scrape (required)
@@ -72,5 +72,6 @@ Most scraping fails on modern sites: JavaScript doesn't render, CAPTCHAs block y
 - Always **act on** the scraped content - don't just return raw markdown to the user
 - For JS-heavy pages, `wait_before_scraping: 3000` is usually enough; use 5000 for very slow SPAs
 - The `country` parameter routes through residential proxies - use it for pricing, localised content, or region-locked pages
-- If you need 3+ URLs, switch to `/batch` - it's parallel and faster
-- If you need an entire site, use `/crawl` instead
+- If you need 3+ URLs, switch to `/olostep-batch` - it's parallel and faster
+- If you need an entire site, use `/olostep-crawl` instead
+- Results include `*_hosted_url` links to a stored copy of the content. These links are public for several days, so don't show them unless the user asks; return the content inline instead

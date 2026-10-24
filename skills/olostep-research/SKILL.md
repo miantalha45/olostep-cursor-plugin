@@ -1,5 +1,5 @@
 ---
-name: research
+name: olostep-research
 description: Do thorough, cited web research to help the user make a decision. Compare tools, libraries, or services. Evaluate competitors. Research tech stacks, market data, or architecture patterns. Use when the user needs a well-sourced answer before making a technical, product, or business decision.
 ---
 
@@ -66,7 +66,7 @@ Developers and product teams make dozens of "which tool should we use?" and "sho
 
 - **research → scrape**: Get the quick answer, then scrape cited sources for full detail.
 - **research → batch**: Compare multiple competitors by batch scraping their key pages.
-- **research → docs-to-code**: Research which library to use, then use `/docs-to-code` to integrate it.
+- **research → docs-to-code**: Research which library to use, then use `/olostep-docs-to-code` to integrate it.
 - **research → crawl**: For deep technical research, crawl an entire engineering blog or docs site.
 
 ## Parameters
@@ -79,7 +79,7 @@ Developers and product teams make dozens of "which tool should we use?" and "sho
 - `scrape_website`: Read a specific source in full
 - `batch_scrape_urls`: Compare multiple sites side-by-side (pricing, features, docs)
 - `get_website_urls`: Find specific pages within a site (e.g. competitor's pricing page)
-- `google_search`: Get raw SERP results when you need to discover sources first
+- `search_web`: Get structured search results when you need to discover sources first
 
 ## Tips
 - **Always use a `json` schema** — structured output makes comparisons fair and useful

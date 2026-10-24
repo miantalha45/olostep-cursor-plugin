@@ -17,6 +17,7 @@ from conftest import (
     MCP_REF_PATTERN,
     PYTHON_BLOCK_RE,
     SKILLS_DIR,
+    STALE_MCP_TOOLS,
     STALE_PARAMS,
     all_skill_files,
 )
@@ -63,6 +64,16 @@ def test_mcp_tool_references_valid(skill_file):
     assert not unknown, (
         f"Unknown MCP tool(s) {unknown} in {skill_file.relative_to(SKILLS_DIR.parent)}\n"
         f"Known tools: {sorted(KNOWN_MCP_TOOLS)}"
+    )
+
+
+@pytest.mark.parametrize("skill_file", all_skill_files(), ids=lambda f: f.parent.name)
+def test_no_removed_mcp_tools(skill_file):
+    """Skills should not advertise MCP tools removed from olostep-mcp."""
+    content = skill_file.read_text(encoding="utf-8")
+    stale = [tool for tool in STALE_MCP_TOOLS if tool in content]
+    assert not stale, (
+        f"Removed MCP tool(s) {stale} found in {skill_file.relative_to(SKILLS_DIR.parent)}"
     )
 
 

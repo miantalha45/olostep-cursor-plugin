@@ -1,5 +1,5 @@
 ---
-name: docs-to-code
+name: olostep-docs-to-code
 description: Scrape API documentation or library docs and use them to write working, up-to-date code. Use when the user wants to integrate a third-party API, learn a new library, generate SDK usage examples, write code based on a docs URL, or update code after a library version change. This is the flagship workflow — never hallucinate API parameters when you can scrape the real docs.
 ---
 
@@ -66,13 +66,13 @@ AI models hallucinate API parameters, use deprecated methods, and miss breaking 
 ## Chain with other skills
 
 - **map → scrape → code**: Map a docs site to find the right pages → scrape the specific reference pages → write code from them.
-- **search → scrape → code**: Don't have the docs URL? Use `/search` to find it, then scrape and code.
+- **search → scrape → code**: Don't have the docs URL? Use `/olostep-search` to find it, then scrape and code.
 - **crawl → code**: For full library learning, crawl the entire docs section → synthesise into working examples.
 
 ## Tips
 - **Always scrape before writing** — never assume your training data has the current API surface
 - If a user mentions a library version ("v5", "latest"), the docs have likely changed — scrape them
-- For large APIs, use `/map` first to find the exact reference pages, then scrape those specifically
+- For large APIs, use `/olostep-map` first to find the exact reference pages, then scrape those specifically
 - Prefer specific **reference pages** over overview/guide pages — they have the exact parameters and types
 - If auth is unclear from the endpoint docs, scrape the authentication/quickstart page separately
 - Always include error handling based on documented error codes

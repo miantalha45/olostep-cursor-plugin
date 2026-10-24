@@ -1,5 +1,5 @@
 ---
-name: integrate
+name: olostep-integrate
 description: Automatically integrate the Olostep SDK into the user's codebase. Analyzes the project, detects the language and framework, chooses the right integration pattern, installs the SDK, writes all the code, and verifies it works — with minimal prompting. Use when the user wants to add Olostep web scraping, search, or AI answers to their project.
 argument-hint: "API-KEY"
 ---
@@ -11,7 +11,7 @@ Analyze the user's codebase, detect their stack, and write a complete, working O
 ## When to use
 
 - User says "integrate Olostep", "add Olostep to my project", "set up Olostep SDK", or "I want web scraping in my app"
-- User runs `/olostep:integrate` with or without an API key
+- User runs `/olostep-integrate` with or without an API key
 - User wants to add web search, scraping, crawling, or AI answers to an existing codebase
 - User is migrating from another scraping provider (Firecrawl, Apify, Browserbase, ScrapingBee, etc.)
 
@@ -826,22 +826,23 @@ print(answer)
 
 If the user is also using Cursor, set up the MCP server config alongside the SDK integration.
 
-Add to `.cursor/mcp.json`:
+The Olostep Cursor plugin connects to the hosted MCP server (`https://mcp.olostep.com/mcp`) with OAuth: sign in from **Customize → olostep**, with no key in chat. If OAuth isn't available, use a private manual fallback: set `OLOSTEP_API_KEY` in Cursor's environment and add this to `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
     "olostep": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "olostep-mcp"],
       "env": {
-        "OLOSTEP_API_KEY": "<API_KEY>"
+        "OLOSTEP_API_KEY": "${env:OLOSTEP_API_KEY}"
       }
     }
   }
 }
 ```
 
-MCP tools available: `scrape_website`, `get_webpage_content`, `search_web`, `google_search`, `answers`, `batch_scrape_urls`, `create_crawl`, `create_map`, `get_website_urls`.
+MCP tools available: `scrape_website`, `get_webpage_content`, `search_web`, `answers`, `batch_scrape_urls`, `get_batch_results`, `create_crawl`, `get_crawl_results`, `create_map`, `get_website_urls`.
 
 ---
 
@@ -859,7 +860,7 @@ After writing all code:
 4. Suggest next steps:
    - "Try calling the Olostep scrape endpoint to test"
    - "Run your app and test the new API route / tool"
-   - "Check out `/scrape`, `/search`, and `/research` for ad-hoc web data"
+   - "Check out `/olostep-scrape`, `/olostep-search`, and `/olostep-research` for ad-hoc web data"
 
 ## Migration from other providers
 
