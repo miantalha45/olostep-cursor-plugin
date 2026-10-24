@@ -1,13 +1,13 @@
 ---
 name: olostep-setup
-description: Configure the Olostep Cursor plugin without sharing credentials in chat.
+description: Connect the Olostep Cursor plugin via OAuth sign-in, without sharing credentials in chat.
 ---
 
 # Set up Olostep
 
-Check whether the Olostep MCP server is available in Cursor.
+Check whether the olostep MCP server is connected in Cursor.
 
-- If it is not configured, direct the user to **Customize → Olostep → Configure** and to https://olostep.com/auth if they need an API key. After saving, they must reload Cursor (**Developer: Reload Window**) for the key to take effect.
+- If it is not connected, follow the `olostep-setup` skill: direct the user to **Customize → olostep** to sign in with their Olostep account (or create one at https://olostep.com/auth).
 - Never ask for, accept, display, or write an API key in chat, source code, or a tracked file.
-- If the plugin configuration UI is unavailable, explain the private environment-variable fallback in the `setup` skill.
-- After configuration, suggest a harmless scrape of `https://example.com` to confirm the connection.
+- If OAuth sign-in is unavailable, explain the API-key fallback in the `olostep-setup` skill.
+- After connecting, suggest a harmless scrape of `https://example.com` to confirm the connection.

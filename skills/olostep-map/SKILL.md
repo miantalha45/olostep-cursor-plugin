@@ -1,5 +1,5 @@
 ---
-name: map
+name: olostep-map
 description: Discover and list all URLs on a website using Olostep. Use when the user wants to see what pages exist on a site, find specific sections (docs, blog, API reference), audit a site's structure, or get a URL list to feed into batch or crawl.
 ---
 
@@ -16,7 +16,7 @@ You can't scrape what you can't find. Map gives you a complete inventory of ever
 - User wants to know what pages exist on a site before committing to a scrape or crawl
 - User wants to find specific sections: all blog posts, all API reference pages, all pricing pages
 - User wants to understand a site's structure and content organisation
-- User needs a URL list to feed into `/batch` or `/crawl`
+- User needs a URL list to feed into `/olostep-batch` or `/olostep-crawl`
 - User says "find all the pages about X on this site"
 
 ## Workflow
@@ -32,11 +32,11 @@ You can't scrape what you can't find. Map gives you a complete inventory of ever
 
 **"Find the right docs page"**
 > "Map https://docs.stripe.com and find all pages about webhooks"
-→ `create_map` with `search_query: "webhooks"` → returns webhook-related URLs ranked by relevance → user picks the best one → `/scrape` it.
+→ `create_map` with `search_query: "webhooks"` → returns webhook-related URLs ranked by relevance → user picks the best one → `/olostep-scrape` it.
 
 **"Discover all blog posts"**
 > "Map https://vercel.com/blog and list all blog posts"
-→ Map with `include_url_patterns: ["/blog/**"]` → returns all blog post URLs → offer to `/batch` scrape for content analysis.
+→ Map with `include_url_patterns: ["/blog/**"]` → returns all blog post URLs → offer to `/olostep-batch` scrape for content analysis.
 
 **"Understand a competitor's site"**
 > "Map https://competitor.com and tell me what sections they have"
@@ -48,7 +48,7 @@ You can't scrape what you can't find. Map gives you a complete inventory of ever
 
 **"Plan before crawling"**
 > "I want to scrape the entire Tailwind CSS docs. Map it first so I know what I'm dealing with."
-→ Map → see 120 URLs across `/docs/`, `/blog/`, `/showcase/` → user picks just `/docs/` → feed those into `/batch` or `/crawl`.
+→ Map → see 120 URLs across `/docs/`, `/blog/`, `/showcase/` → user picks just `/docs/` → feed those into `/olostep-batch` or `/olostep-crawl`.
 
 **"Audit our own site"**
 > "Map our marketing site and count how many pages we have per section"

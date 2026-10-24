@@ -1,12 +1,7 @@
 {
   "mcpServers": {
     "olostep": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "olostep-mcp"],
-      "env": {
-        "OLOSTEP_API_KEY": "${OLOSTEP_API_KEY}"
-      }
+      "url": "https://mcp.olostep.com/mcp"
     }
   }
 }

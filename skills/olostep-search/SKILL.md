@@ -1,5 +1,5 @@
 ---
-name: search
+name: olostep-search
 description: Search the web using Olostep for live, up-to-date information. Three tools available — answers (AI-synthesised answers with citations), search_web (structured search results), and get_website_urls (find pages within a specific site). Use when the user needs current data, comparisons, or facts the AI's training data may not have.
 ---
 
@@ -32,7 +32,7 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 **For open research / comparisons / fact-checking:**
 1. Use `answers` with the user's question as `task`.
 2. If the result needs to be used in code, a table, or a comparison, pass a `json` schema.
-3. Present the answer with source URLs — offer to `/scrape` any source for deeper detail.
+3. Present the answer with source URLs — offer to `/olostep-scrape` any source for deeper detail.
 
 **For structured web search results:**
 1. Use `search_web` with the query.
@@ -42,7 +42,7 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 **For finding pages within a specific site:**
 1. Use `get_website_urls` with the site URL and search query.
 2. Returns up to 100 URLs ranked by relevance.
-3. Offer to `/scrape` the most relevant result for full content.
+3. Offer to `/olostep-scrape` the most relevant result for full content.
 
 ## Real developer workflows
 
@@ -72,9 +72,9 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 
 ## Chain with other skills
 
-- **search → scrape**: Use `answers` or `search_web` to find URLs, then `/scrape` the best ones for full content.
-- **search → docs-to-code**: Search for the docs URL, then use `/docs-to-code` workflow to write the integration.
-- **search → batch**: Get a list of URLs from search results, then `/batch` scrape all of them.
+- **search → scrape**: Use `answers` or `search_web` to find URLs, then `/olostep-scrape` the best ones for full content.
+- **search → docs-to-code**: Search for the docs URL, then use `/olostep-docs-to-code` workflow to write the integration.
+- **search → batch**: Get a list of URLs from search results, then `/olostep-batch` scrape all of them.
 
 ## Parameters
 
@@ -97,4 +97,4 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 - The `json` param on `answers` lets you get data in a shape you can paste straight into code or a markdown table
 - Use `search_web` when you need structured search results rather than a synthesised answer
 - Use `get_website_urls` when the user already knows which site to search — it's faster and more precise than broad web search
-- Always offer to `/scrape` cited URLs if the user wants deeper detail on any result
+- Always offer to `/olostep-scrape` cited URLs if the user wants deeper detail on any result

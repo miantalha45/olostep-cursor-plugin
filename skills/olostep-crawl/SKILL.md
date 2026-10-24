@@ -1,5 +1,5 @@
 ---
-name: crawl
+name: olostep-crawl
 description: Autonomously crawl an entire website by following links from a starting URL using Olostep. Use when the user wants to ingest an entire docs site, blog, knowledge base, or any multi-page site as context for coding, writing, analysis, or building a knowledge base.
 ---
 
@@ -55,9 +55,9 @@ Manually collecting pages from a docs site is tedious and incomplete. Crawl does
 
 ## Chain with other skills
 
-- **map → crawl**: Use `/map` first to see all URLs, then `/crawl` a specific section. Avoids wasting crawl budget on irrelevant pages.
-- **crawl → code**: Crawl the docs, then write complete integration code from the collected knowledge (see `/docs-to-code`).
-- **crawl → batch**: If the crawl is too broad, use `/map` + `/batch` for more targeted extraction.
+- **map → crawl**: Use `/olostep-map` first to see all URLs, then `/olostep-crawl` a specific section. Avoids wasting crawl budget on irrelevant pages.
+- **crawl → code**: Crawl the docs, then write complete integration code from the collected knowledge (see `/olostep-docs-to-code`).
+- **crawl → batch**: If the crawl is too broad, use `/olostep-map` + `/olostep-batch` for more targeted extraction.
 
 ## Parameters
 - **start_url**: Starting URL for the crawl (required)
@@ -70,6 +70,6 @@ Manually collecting pages from a docs site is tedious and incomplete. Crawl does
 ## Tips
 - **Start small**: 10 pages is usually enough for a focused docs section. Ask before going to 50+.
 - Always **synthesise** after crawling — generate a summary, cheat sheet, comparison, or structured data.
-- Use `/map` first on large sites to understand the structure, then `/crawl` the relevant section.
-- For a **known list** of URLs, `/batch` is better — it's parallel and you control exactly which pages to scrape.
-- For a **single page**, just use `/scrape`.
+- Use `/olostep-map` first on large sites to understand the structure, then `/olostep-crawl` the relevant section.
+- For a **known list** of URLs, `/olostep-batch` is better — it's parallel and you control exactly which pages to scrape.
+- For a **single page**, just use `/olostep-scrape`.

@@ -1,5 +1,5 @@
 ---
-name: answers
+name: olostep-answers
 description: Get AI-powered answers with citations from live web data using Olostep. Use when the user needs up-to-date facts, competitive intelligence, pricing comparisons, structured data from the web, or wants web-sourced answers in a specific JSON shape they can use directly in code or docs.
 ---
 
@@ -24,7 +24,7 @@ This is the most powerful tool in the Olostep toolkit. Instead of scraping indiv
 1. Use `answers` with the user's question as `task`.
 2. **Always use the `json` parameter** when the user needs structured, comparable, or code-ready output.
 3. Return the answer with source URLs.
-4. Offer to `/scrape` any cited source for deeper detail.
+4. Offer to `/olostep-scrape` any cited source for deeper detail.
 
 ## The power of `json`
 
@@ -77,8 +77,8 @@ json: "Return a bullet list of the top 5 changes with one-line descriptions"
 
 ## Chain with other skills
 
-- **answers → scrape**: Get a quick answer with citations, then `/scrape` a cited source for the full page content.
-- **answers → batch**: Research a topic, then `/batch` scrape all cited sources for comprehensive detail.
+- **answers → scrape**: Get a quick answer with citations, then `/olostep-scrape` a cited source for the full page content.
+- **answers → batch**: Research a topic, then `/olostep-batch` scrape all cited sources for comprehensive detail.
 - **answers → code**: Get structured technical data, then use it to write code (e.g. comparison component, config file, feature matrix).
 
 ## Parameters
@@ -91,6 +91,6 @@ json: "Return a bullet list of the top 5 changes with one-line descriptions"
 ## Tips
 - **Always use `json`** when the output needs to be structured, compared, or used in code — it's the killer feature
 - Share citation URLs with the user so they can verify and explore further
-- For deeper detail on any cited source, offer to `/scrape` it
+- For deeper detail on any cited source, offer to `/olostep-scrape` it
 - This replaces dozens of manual Google searches → use it liberally for any "current state of X" question
 - Works great for: pricing, versions, status, team info, tech stacks, market data, tool comparisons

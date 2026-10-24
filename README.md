@@ -20,7 +20,7 @@ All with automatic JavaScript rendering, anti-bot handling, and proxy rotation b
 
 1. In Cursor, open **Customize** in the sidebar and search for **Olostep**, or open the Olostep page on the [Cursor Marketplace](https://cursor.com/marketplace) and select **Add to Cursor**.
 2. Select **Install** and choose a project or user scope.
-3. Add your API key as described in [Setup and authentication](#setup-and-authentication).
+3. Sign in to Olostep as described in [Setup and authentication](#setup-and-authentication).
 
 ### From source
 
@@ -30,15 +30,17 @@ All with automatic JavaScript rendering, anti-bot handling, and proxy rotation b
 
 ## Setup and authentication
 
-1. Get a free API key at [olostep.com/auth](https://olostep.com/auth).
-2. In Cursor, open **Customize**, select **Olostep**, then select **Configure**. Paste the key into **Olostep API key** and select **Save**.
-3. Reload Cursor (**Developer: Reload Window**) so the MCP server picks up the key.
+The plugin connects to Olostep's hosted MCP server (`https://mcp.olostep.com/mcp`) and signs in with OAuth. No API key or Node.js is needed.
 
-Cursor passes the key to the local MCP server; it is not stored in this repository. Never paste an API key into an agent chat.
+1. In Cursor, open **Customize** and select the **olostep** MCP server.
+2. Select the sign-in / connect option and log in with your Olostep account (or create a free one) in the browser window that opens.
+3. Return to Cursor. The olostep server shows as connected with its 10 tools.
 
-### Manual MCP setup (without the plugin)
+Your Olostep credentials stay in Cursor's OAuth session; nothing is stored in this repository. Never paste an API key into an agent chat.
 
-To use only the MCP tools without installing the plugin, set `OLOSTEP_API_KEY` in the environment that launches Cursor, then add this private configuration to either `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global):
+### Manual MCP setup with an API key
+
+If OAuth sign-in isn't available in your environment, run the MCP server locally with an API key instead. Get a key at [olostep.com/auth](https://olostep.com/auth), set `OLOSTEP_API_KEY` in the environment that launches Cursor, then add this private configuration to either `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global):
 
 ```json
 {
@@ -59,28 +61,32 @@ Restart Cursor and confirm that the Olostep MCP server is enabled in **Customize
 
 ### Troubleshooting
 
-If a tool call fails with **401 Unauthorized**, check the key in **Configure** (or your environment, for manual setup), then reload Cursor. The MCP server only reads the key when it starts.
+- **401 Unauthorized or "needs authentication"**: sign in again from the olostep server in **Customize**. For the manual setup, check `OLOSTEP_API_KEY` and reload Cursor; the local server only reads the key when it starts.
+- **Sign-in window doesn't open**: reload Cursor (**Developer: Reload Window**) and try again from **Customize**.
 
 ## Available Skills
 
 | Skill | Description |
 |-------|-------------|
-| `setup` | Configure your Olostep API key |
-| `scrape` | Extract content from a single webpage |
-| `search` | Search the web for information |
-| `crawl` | Crawl an entire website from a start URL |
-| `map` | Discover all URLs on a website |
-| `batch` | Batch scrape up to 10,000 URLs |
-| `answers` | Get AI-powered answers with citations |
-| `docs-to-code` | Build code from current API or library documentation |
-| `debug-error` | Research current errors and known fixes |
-| `research` | Perform cited, multi-source technical research |
+| `olostep-setup` | Connect Cursor to Olostep (OAuth sign-in) |
+| `olostep-scrape` | Extract content from a single webpage |
+| `olostep-search` | Search the web for information |
+| `olostep-crawl` | Crawl an entire website from a start URL |
+| `olostep-map` | Discover all URLs on a website |
+| `olostep-batch` | Batch scrape up to 10,000 URLs |
+| `olostep-answers` | Get AI-powered answers with citations |
+| `olostep-docs-to-code` | Build code from current API or library documentation |
+| `olostep-debug-error` | Research current errors and known fixes |
+| `olostep-research` | Perform cited, multi-source technical research |
+| `olostep-extract-schema` | Extract structured data matching a schema or type |
+| `olostep-migrate-code` | Update code from a migration guide or changelog |
+| `olostep-integrate` | Add the Olostep SDK to your codebase |
 
 ## Slash Commands
 
 | Command | Description |
 |---------|-------------|
-| `/olostep-setup` | Configure Olostep without sharing credentials in chat |
+| `/olostep-setup` | Connect Olostep via OAuth sign-in, no credentials in chat |
 | `/olostep-scrape` | Scrape a webpage and return useful content |
 | `/olostep-search` | Search the live web for current information |
 | `/olostep-docs-to-code` | Use current documentation to write implementation-ready code |

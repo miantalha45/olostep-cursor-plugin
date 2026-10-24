@@ -1,5 +1,5 @@
 ---
-name: batch
+name: olostep-batch
 description: Scrape up to 10,000 URLs in parallel using Olostep. Use when the user has a list of URLs to extract content from at once — product pages, job listings, pricing pages, changelogs, docs, or any set of known pages. Much faster than scraping one-by-one.
 ---
 
@@ -14,14 +14,14 @@ Scraping 50 pages sequentially takes minutes and often fails halfway through (ra
 ## When to use
 
 - User has 3+ URLs they want content from (don't scrape them one-by-one)
-- User has a list from `/map` and wants to pull content from matching pages
+- User has a list from `/olostep-map` and wants to pull content from matching pages
 - User wants to compare multiple competitor pages, product pages, or pricing pages side-by-side
 - User needs to build a dataset from a list of known URLs
 - User wants to audit, analyse, or extract patterns across many pages
 
 ## Workflow
 
-1. Collect URLs from the user (or from a previous `/map` result).
+1. Collect URLs from the user (or from a previous `/olostep-map` result).
 2. Build the array: `[{"url": "...", "custom_id": "competitor-1"}, ...]`.
 3. Call `batch_scrape_urls` with the array.
 4. Use `custom_id` on each URL so you can match results back to the source.
@@ -40,7 +40,7 @@ Scraping 50 pages sequentially takes minutes and often fails halfway through (ra
 
 **"Audit all docs pages for completeness"**
 > "I mapped our docs site and got 45 URLs. Batch scrape all of them and tell me which pages are missing code examples"
-→ `/map` first → feed URLs into `batch` → scan each page's content for code blocks → report gaps.
+→ `/olostep-map` first → feed URLs into `batch` → scan each page's content for code blocks → report gaps.
 
 **"Extract every job listing"**
 > "Scrape all 20 of these job posting URLs and give me a table of: title, company, salary range, required skills, location"
@@ -60,8 +60,8 @@ Scraping 50 pages sequentially takes minutes and often fails halfway through (ra
 
 ## Chain with other skills
 
-- **map → batch**: The most powerful combo. `/map` discovers all URLs on a site, you filter to the ones you need, then `/batch` scrapes them all. Perfect for docs sites, blogs, product catalogs.
-- **search → batch**: Use `/search` to find relevant URLs, then `/batch` scrape all results for full content.
+- **map → batch**: The most powerful combo. `/olostep-map` discovers all URLs on a site, you filter to the ones you need, then `/olostep-batch` scrapes them all. Perfect for docs sites, blogs, product catalogs.
+- **search → batch**: Use `/olostep-search` to find relevant URLs, then `/olostep-batch` scrape all results for full content.
 - **batch → code**: Batch scrape API docs pages, then generate typed clients or integration code from the combined content.
 
 ## Parameters
@@ -73,7 +73,7 @@ Scraping 50 pages sequentially takes minutes and often fails halfway through (ra
 
 ## Tips
 - **Always use `custom_id`** — it makes matching results to sources trivial (e.g. `"custom_id": "vercel-pricing"`)
-- For 1–2 URLs, use `/scrape`. For 3+, always use `/batch` — it's parallel and faster
-- Combine with `/map` for the most powerful pattern: discover → filter → batch scrape → synthesise
+- For 1–2 URLs, use `/olostep-scrape`. For 3+, always use `/olostep-batch` — it's parallel and faster
+- Combine with `/olostep-map` for the most powerful pattern: discover → filter → batch scrape → synthesise
 - The `country` param routes through residential proxies in that country — great for comparing regional content
 - Always synthesise across results (tables, comparisons, summaries) — don't dump raw content

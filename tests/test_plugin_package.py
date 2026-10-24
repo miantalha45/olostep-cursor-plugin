@@ -33,28 +33,33 @@ def test_manifest_references_existing_package_files():
         assert resolved.exists(), f"{field} points to a missing path: {value}"
 
 
-def test_manifest_declares_the_mcp_api_key_variable():
+def test_manifest_declares_every_mcp_variable():
     """Cursor plugin variables must cover each placeholder in the MCP config."""
     manifest = read_json(MANIFEST_PATH)
-    mcp = read_json(MCP_PATH)
-    variables = manifest["variables"]
+    placeholders = set(VARIABLE_RE.findall(MCP_PATH.read_text(encoding="utf-8")))
+    declared = set(manifest.get("variables", {}).get("properties", {}))
 
-    assert variables["type"] == "object"
-    assert "OLOSTEP_API_KEY" in variables["properties"]
-    assert "OLOSTEP_API_KEY" in variables["required"]
-
-    placeholders = set(VARIABLE_RE.findall(json.dumps(mcp)))
-    assert placeholders <= set(variables["properties"])
+    assert placeholders <= declared, f"Undeclared variables: {placeholders - declared}"
 
 
-def test_stdio_mcp_configuration_is_complete():
-    """The local fallback remains a valid, dependency-light Cursor MCP server."""
+def test_mcp_uses_hosted_oauth_server():
+    """The plugin connects to the hosted server so Cursor handles OAuth sign-in."""
     server = read_json(MCP_PATH)["mcpServers"]["olostep"]
 
-    assert server["type"] == "stdio"
-    assert server["command"] == "npx"
-    assert server["args"] == ["-y", "olostep-mcp"]
-    assert server["env"] == {"OLOSTEP_API_KEY": "${OLOSTEP_API_KEY}"}
+    assert server == {"url": "https://mcp.olostep.com/mcp"}, (
+        "mcp.json must point at the hosted server with no API key or local command"
+    )
+
+
+def test_skill_names_are_namespaced():
+    """Skills use the olostep- prefix and match their folder, to avoid clashing with other plugins."""
+    for skill in sorted((PLUGIN_ROOT / "skills").glob("*/SKILL.md")):
+        frontmatter = FRONTMATTER_RE.search(skill.read_text(encoding="utf-8"))
+        assert frontmatter, f"No frontmatter in {skill}"
+        name = COMMAND_NAME_RE.search(frontmatter.group(1))
+        assert name, f"Invalid name in {skill}"
+        assert name.group(1).startswith("olostep-"), f"{skill.parent.name} must be prefixed with olostep-"
+        assert name.group(1) == skill.parent.name, f"Skill name {name.group(1)} != folder {skill.parent.name}"
 
 
 def test_commands_have_cursor_frontmatter_and_reuse_existing_workflows():
@@ -83,7 +88,7 @@ def test_package_does_not_include_a_local_secret_file():
 
 def test_setup_guidance_never_uses_a_chat_credential_placeholder():
     """Onboarding must direct secrets to Cursor configuration, never agent chat."""
-    setup = (PLUGIN_ROOT / "skills" / "setup" / "SKILL.md").read_text(encoding="utf-8")
+    setup = (PLUGIN_ROOT / "skills" / "olostep-setup" / "SKILL.md").read_text(encoding="utf-8")
     assert "<their-api-key>" not in setup
     assert "your-api-key-here" not in setup
-    assert "Never ask them to paste an API key into chat." in setup
+    assert "Never ask them to paste the key into chat." in setup
