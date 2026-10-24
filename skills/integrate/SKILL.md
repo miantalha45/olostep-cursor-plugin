@@ -826,22 +826,23 @@ print(answer)
 
 If the user is also using Cursor, set up the MCP server config alongside the SDK integration.
 
-Add to `.cursor/mcp.json`:
+For the Olostep Cursor plugin, use **Customize → Olostep → Configure** rather than sharing a key in chat. If you need a private manual fallback, set `OLOSTEP_API_KEY` in Cursor's environment and add this to `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
     "olostep": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "olostep-mcp"],
       "env": {
-        "OLOSTEP_API_KEY": "<API_KEY>"
+        "OLOSTEP_API_KEY": "${env:OLOSTEP_API_KEY}"
       }
     }
   }
 }
 ```
 
-MCP tools available: `scrape_website`, `get_webpage_content`, `search_web`, `google_search`, `answers`, `batch_scrape_urls`, `create_crawl`, `create_map`, `get_website_urls`.
+MCP tools available: `scrape_website`, `get_webpage_content`, `search_web`, `answers`, `batch_scrape_urls`, `get_batch_results`, `create_crawl`, `get_crawl_results`, `create_map`, `get_website_urls`.
 
 ---
 

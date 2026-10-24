@@ -17,7 +17,7 @@ KNOWN_MCP_TOOLS = {
     "create_crawl",
     "create_map",
     "get_batch_results",
-    "google_search",
+    "get_crawl_results",
     "get_webpage_content",
     "get_website_urls",
     "scrape_website",
@@ -28,6 +28,9 @@ KNOWN_MCP_TOOLS = {
 STALE_PARAMS = [
     "json_schema=",       # → json_format=
 ]
+
+# Removed from the current olostep-mcp tool list.
+STALE_MCP_TOOLS = ["google_search"]
 
 # MCP tool reference pattern for Claude Code (mcp__<server>__<tool>)
 MCP_REF_PATTERN = re.compile(r"mcp__olostep__(\w+)")

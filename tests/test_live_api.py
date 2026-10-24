@@ -7,7 +7,11 @@ Run with:
     OLOSTEP_API_KEY=your_key pytest tests/test_live_api.py -v
 """
 import pytest
-from olostep import Olostep
+
+Olostep = pytest.importorskip(
+    "olostep",
+    reason="Install the optional olostep SDK to run live API tests",
+).Olostep
 
 
 # ---------------------------------------------------------------------------

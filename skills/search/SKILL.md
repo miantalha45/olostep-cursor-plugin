@@ -1,6 +1,6 @@
 ---
 name: search
-description: Search the web using Olostep for live, up-to-date information. Three tools available — answers (AI-synthesised answers with citations), google_search (structured Google results), and get_website_urls (find pages within a specific site). Use when the user needs current data, comparisons, or facts the AI's training data may not have.
+description: Search the web using Olostep for live, up-to-date information. Three tools available — answers (AI-synthesised answers with citations), search_web (structured search results), and get_website_urls (find pages within a specific site). Use when the user needs current data, comparisons, or facts the AI's training data may not have.
 ---
 
 # Olostep Search
@@ -24,7 +24,7 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 | Need | Tool | Why |
 |------|------|-----|
 | Broad research question, comparison, fact-check | `answers` | AI-synthesised answer from multiple sources, with citations |
-| Raw Google results (organic, PAA, knowledge graph) | `google_search` | Structured SERP data when you need the actual search results |
+| Structured web search results | `search_web` | Structured results when you need source URLs and snippets |
 | Find pages within a specific site | `get_website_urls` | Ranked URLs from one domain, sorted by relevance to your query |
 
 ## Workflow
@@ -34,9 +34,9 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 2. If the result needs to be used in code, a table, or a comparison, pass a `json` schema.
 3. Present the answer with source URLs — offer to `/scrape` any source for deeper detail.
 
-**For raw Google search results:**
-1. Use `google_search` with the query.
-2. Returns structured organic results, knowledge graph, People Also Ask, related searches.
+**For structured web search results:**
+1. Use `search_web` with the query.
+2. Returns structured results suitable for finding source URLs and snippets.
 3. Use this when you need the actual URLs and snippets, not a synthesised answer.
 
 **For finding pages within a specific site:**
@@ -62,9 +62,9 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 > "Search the Supabase docs for row-level security examples"
 → `get_website_urls` on `https://supabase.com/docs` with query `"row level security"` → ranked URLs → scrape the top one.
 
-**"Get raw search results for a competitive analysis"**
-> "Google 'best headless CMS 2026' and give me the top 10 organic results"
-→ `google_search` → structured list of titles, URLs, snippets, and any knowledge graph data.
+**"Get search results for a competitive analysis"**
+> "Search 'best headless CMS 2026' and give me the top 10 results"
+→ `search_web` → structured list of titles, URLs, and snippets.
 
 **"Check current version / status"**
 > "What's the latest version of Next.js and when was it released?"
@@ -72,7 +72,7 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 
 ## Chain with other skills
 
-- **search → scrape**: Use `answers` or `google_search` to find URLs, then `/scrape` the best ones for full content.
+- **search → scrape**: Use `answers` or `search_web` to find URLs, then `/scrape` the best ones for full content.
 - **search → docs-to-code**: Search for the docs URL, then use `/docs-to-code` workflow to write the integration.
 - **search → batch**: Get a list of URLs from search results, then `/batch` scrape all of them.
 
@@ -84,7 +84,7 @@ AI training data goes stale. When a user asks "which library is best" or "what d
   - String: `"return an array with name, price, and pros for each option"`
   - Object: `{"name": "", "price": "", "pros": [], "cons": []}`
 
-### `google_search` — Structured Google SERP results
+### `search_web` — Structured web search results
 - **query**: Search query (required)
 - **country**: Country code for localised results, e.g. `US`, `GB` (default: `US`)
 
@@ -95,6 +95,6 @@ AI training data goes stale. When a user asks "which library is best" or "what d
 ## Tips
 - `answers` is the most powerful — it searches the web, reads sources, and returns a synthesised answer with citations
 - The `json` param on `answers` lets you get data in a shape you can paste straight into code or a markdown table
-- Use `google_search` when you need the raw SERP (organic results, PAA, knowledge graph) rather than a synthesised answer
+- Use `search_web` when you need structured search results rather than a synthesised answer
 - Use `get_website_urls` when the user already knows which site to search — it's faster and more precise than broad web search
 - Always offer to `/scrape` cited URLs if the user wants deeper detail on any result

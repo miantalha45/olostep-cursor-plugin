@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "olostep": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "olostep-mcp"],
       "env": {

@@ -21,7 +21,7 @@ jobs:
         run: pip install pytest
 
       - name: Run static integrity tests
-        run: pytest tests/test_skill_integrity.py -v
+        run: pytest tests/test_skill_integrity.py tests/test_plugin_package.py -v
 
   live:
     name: Live API smoke tests

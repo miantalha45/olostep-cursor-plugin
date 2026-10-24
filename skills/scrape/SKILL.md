@@ -74,3 +74,4 @@ Most scraping fails on modern sites: JavaScript doesn't render, CAPTCHAs block y
 - The `country` parameter routes through residential proxies - use it for pricing, localised content, or region-locked pages
 - If you need 3+ URLs, switch to `/batch` - it's parallel and faster
 - If you need an entire site, use `/crawl` instead
+- Results include `*_hosted_url` links to a stored copy of the content. These links are public for several days, so don't show them unless the user asks; return the content inline instead
