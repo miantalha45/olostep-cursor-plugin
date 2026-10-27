@@ -1,6 +1,8 @@
 # Olostep Plugin for Cursor
 
-Turn any website into clean, LLM-ready markdown or structured data. Olostep integrates powerful web scraping, crawling, search, and AI-powered answers directly into Cursor.
+**Live web search, scraping and crawling API for AI. Get structured, LLM-ready data from any site. Scale to 1M requests in a single batch at low cost.**
+
+[Olostep](https://www.olostep.com) is web data infrastructure for AI. It provides live web search, scraping and crawling API to extract and structure data. This plugin brings Olostep's web scraping, crawling, search, and AI-powered answers directly into Cursor.
 
 ## Features
 
@@ -131,9 +133,13 @@ The following MCP tools are available directly in Cursor chat:
 **Docs-to-code:**
 > "Read the current Stripe Payment Intents documentation and write a typed TypeScript helper that creates a payment intent."
 
+## About Olostep
+
+[Olostep](https://www.olostep.com) is web data infrastructure for AI. It provides live web search, scraping and crawling API to extract and structure data, used in production by AI companies to give their agents fresh, LLM-ready web data at scale.
+
 ## Links
 
-- [Olostep Website](https://olostep.com)
+- [Olostep Website](https://www.olostep.com)
 - [API Documentation](https://docs.olostep.com)
 - [Get API Key](https://olostep.com/auth)
 - [MCP Server on npm](https://www.npmjs.com/package/olostep-mcp)
